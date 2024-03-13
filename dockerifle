@@ -1,0 +1,16 @@
+FROM ubuntu
+# Update package lists and install necessary packages
+RUN apt update && \
+    apt install -y \
+        wget \
+        unzip \
+        apache2 && \
+    rm -rf /var/lib/apt/lists/*
+RUN wget https://www.free-css.com/assets/files/free-css-templates/download/page296/oxer.zip && \
+    unzip oxer.zip && \
+    rm -rf oxer.zip && \
+    cd oxer-html && \
+    cp -r * /var/www/html/
+EXPOSE 80
+CMD ["apachectl","-D","FOREGROUND"]
+#ENTRYPOINY apachectl 
